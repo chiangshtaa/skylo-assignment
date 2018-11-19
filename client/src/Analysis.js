@@ -12,8 +12,11 @@ class Analysis extends Component {
     this.state = {
       start: '',
       end: '',
+      startTime: '',
+      endTime: '',
       tempEnd: '00:01:23 07/11/2018'
     }
+
     store.subscribe(() => {
       let range = store.getState().data.range;
       if (range.length === 0) {
@@ -40,6 +43,7 @@ class Analysis extends Component {
   }
 
   changeStart(e) {
+    console.log('e.target', e.target.value)
     this.setState({
       start: e.target.value
     })
@@ -51,29 +55,56 @@ class Analysis extends Component {
     })
   }
 
+  changeStartTime(e) {
+    console.log('start time', e.target.value);
+    this.setState({
+      startTime: e.target.value
+    })
+  }
+
+  changeEndTime(e) {
+    console.log('end time', e.target.value);
+    this.setState({
+      endTime: e.target.value
+    })
+  }
+
+
   getData() {
     console.log('start', this.state.start, this.state.end);
     if (this.state.start === '' || this.state.end === '') {
       alert('Please enter valid dates');
       return;
     }
-    let start = this.state.start === '' ? '13:02:43 20/10/2018' : this.state.start;
-    let [startTime, startDate] = start.split(' ');
-    startDate = startDate.replace(/\//g, '-').split('-').reverse().join('-');
-    startTime = startTime + '.000';
+    // let start = this.state.start === '' ? '13:02:43 20/10/2018' : this.state.start;
+    // let [startTime, startDate] = start.split(' ');
+    // startDate = startDate.replace(/\//g, '-').split('-').reverse().join('-');
+    // startTime = startTime + '.000';
 
-    let end = this.state.end === '' ? '13:02:43 20/10/2018' : this.state.end;
-    let [endTime, endDate] = end.split(' ');
-    endDate = endDate.replace(/\//g, '-').split('-').reverse().join('-');
-    endTime = endTime + '.000';
+    // let end = this.state.end === '' ? '13:02:43 20/10/2018' : this.state.end;
+    // let [endTime, endDate] = end.split(' ');
+    // endDate = endDate.replace(/\//g, '-').split('-').reverse().join('-');
+    // endTime = endTime + '.000';
 
     // console.log(startTime, startDate);
     // console.log(endTime, endDate);
 
-    let startResult = `${startDate}T${startTime}Z`;
-    let endResult = `${endDate}T${endTime}`;
+    // let startTime = '00:00:00.000';
+    // let endTime = '00:00:00.000';
+
+
+    let startTime = this.state.startTime === '' ? '00:00:00.000Z' : this.state.startTime + ':00.000Z';
+    let endTime = this.state.endTime === '' ? '00:00:00.000' : this.state.endTime + ':00.000';
+    let startResult = `${this.state.start}T${startTime}`;
+    let endResult = `${this.state.end}T${endTime}`;
+    console.log(startResult, endResult);
+    // let startResult = `${startDate}T${startTime}Z`;
+    // let endResult = `${endDate}T${endTime}`;
+
     this.props.dispatch(getData(startResult, endResult));
-    // this.props.dispatch(getData());
+
+
+
     let slider = document.getElementsByClassName('slider');
     let playControls = document.getElementsByClassName('play-controls');
     // let display = document.getElementsByClassName('display');
@@ -91,8 +122,51 @@ class Analysis extends Component {
   render() {
     return (
       <div className='graphs-container'>
-        <div className="inputs">
-          <label>Start: </label>
+        <div className="inputs-container">
+          <div className="inputs">
+            <label className="label">Start: </label>
+            <input
+              className="start"
+              placeholder="Pick start date"
+              name=""
+              size="24"
+              type="date"
+              onChange={(e) => this.changeStart(e)}
+            />
+            <input
+              className="end"
+              type="time"
+              onChange={(e) => this.changeStartTime(e)}
+            />
+          </div>
+          <br/>
+          <div className="inputs">
+            <label className="label">End: </label>
+            <input
+              className="start"
+              placeholder="Pick end date"
+              name=""
+              size="24"
+              type="date"
+              onChange={(e) => this.changeEnd(e)}
+            />
+            <input
+              className="end"
+              type="time"
+              onChange={(e) => this.changeEndTime(e)}
+            />
+          </div>
+          <button className="go" onClick={() => this.getData()} type='button'>Go</button>
+        </div>
+        <Graphs/>
+      </div>
+    )
+  }
+}
+
+
+export default connect()(Analysis);
+          {/*<label>Start: </label>
           <input 
             className="start"
             placeholder="HH:MM:SS DD/MM/YYYY" 
@@ -110,14 +184,4 @@ class Analysis extends Component {
             size="21" 
             type="text" 
             onChange={(e) => this.changeEnd(e)}
-          />
-          <button onClick={() => this.getData()} type='button'>Go</button>
-        </div>
-        <Graphs/>
-      </div>
-    )
-  }
-}
-
-
-export default connect()(Analysis);
+          />*/}

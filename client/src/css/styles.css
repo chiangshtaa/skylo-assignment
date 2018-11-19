@@ -69,14 +69,26 @@ body, html {
   height: 400px;
 }
 
-.inputs {
+.inputs-container {
   flex: 10%;
   /*display: flex;*/
   /*flex-direction: row;*/
   /*flex-wrap: wrap;*/
   height: 100px;
-  text-align: center;
+  /*text-align: center;*/
   padding-top: 50px;
+  padding-left: 20px;
+}
+
+.label {
+  width: 55px;
+  display: inline-block;
+}
+
+.go {
+  margin-left: 240px;
+  width: 50px;
+  cursor: pointer;
 }
 
 .start, .end {
