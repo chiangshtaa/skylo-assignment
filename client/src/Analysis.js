@@ -10,8 +10,8 @@ class Analysis extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start: '13:02:43 20/10/2018',
-      end: '13:02:43 20/10/2018',
+      start: '',
+      end: '',
       tempEnd: '00:01:23 07/11/2018'
     }
     store.subscribe(() => {
@@ -52,6 +52,11 @@ class Analysis extends Component {
   }
 
   getData() {
+    console.log('start', this.state.start, this.state.end);
+    if (this.state.start === '' || this.state.end === '') {
+      alert('Please enter valid dates');
+      return;
+    }
     let start = this.state.start === '' ? '13:02:43 20/10/2018' : this.state.start;
     let [startTime, startDate] = start.split(' ');
     startDate = startDate.replace(/\//g, '-').split('-').reverse().join('-');
@@ -83,7 +88,7 @@ class Analysis extends Component {
     return (
       <div className='graphs-container'>
         <div className="inputs">
-          <label>To</label>
+          <label>Start</label>
           <input 
             placeholder="HH:MM:SS DD/MM/YYYY" 
             name="" 
@@ -92,7 +97,7 @@ class Analysis extends Component {
             onChange={(e) => this.changeStart(e)}
           />
 
-          <label>From</label>
+          <label>End</label>
           <input 
             placeholder="HH:MM:SS DD/MM/YYYY" 
             name="" 
