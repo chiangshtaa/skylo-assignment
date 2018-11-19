@@ -110,7 +110,8 @@ class Controls extends Component {
           value={this.state.timeCurrent} 
           onChange={(e) => this.changeTime(e)}
         />
-        <div className="display">{this.state.timeCurrent}</div>
+        <div className="display"></div>
+        {/*<div className="display">{this.state.timeCurrent}</div>*/}
         {/*<div className="display">{this.props.updateTime.index}</div>*/}
         <button className="play" onClick={() => this.automateSlider()}>Play</button>
         <button className="pause" onClick={() => this.stopSlider()}>Pause</button>

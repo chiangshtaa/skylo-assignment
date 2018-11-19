@@ -11,7 +11,8 @@ class Analysis extends Component {
     super(props);
     this.state = {
       start: '13:02:43 20/10/2018',
-      end: '00:01:23 07/11/2018'
+      end: '13:02:43 20/10/2018',
+      tempEnd: '00:01:23 07/11/2018'
     }
     store.subscribe(() => {
       let range = store.getState().data.range;
@@ -51,17 +52,17 @@ class Analysis extends Component {
   }
 
   getData() {
-
-    let start = this.state.start;
+    let start = this.state.start === '' ? '13:02:43 20/10/2018' : this.state.start;
     let [startTime, startDate] = start.split(' ');
     startDate = startDate.replace(/\//g, '-').split('-').reverse().join('-');
     startTime = startTime + '.000';
 
-    let end = this.state.end;
+    let end = this.state.end === '' ? '13:02:43 20/10/2018' : this.state.end;
     let [endTime, endDate] = end.split(' ');
     endDate = endDate.replace(/\//g, '-').split('-').reverse().join('-');
     endTime = endTime + '.000';
 
+    console.log(startTime, startDate);
     console.log(endTime, endDate);
 
     let startResult = `${startDate}T${startTime}Z`;
