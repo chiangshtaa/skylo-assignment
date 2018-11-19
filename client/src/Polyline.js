@@ -1,7 +1,7 @@
 import { Component } from 'react';
 
 
-class Line extends Component {
+class Polyline extends Component {
   componentWillUpdate() {
     this.line.setMap(null)
   }
@@ -40,4 +40,4 @@ class Line extends Component {
 
 }
 
-export default Line;
+export default Polyline;

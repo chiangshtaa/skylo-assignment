@@ -3,7 +3,7 @@ body, html {
   padding: 0;
   height: 100%;
   /*width: 100%;*/
-  font-family: 'sans-serif';
+  font-family: 'Comic Sans MS', 'sans-serif';
 }
 
 #root {
@@ -58,7 +58,7 @@ body, html {
 
 .map-container {
   flex: 80%;
-  border: 2px solid red;
+  border: 2px solid black;
   margin: 20px;
   position: relative;
   height: 100%;
@@ -71,23 +71,43 @@ body, html {
 
 .inputs {
   flex: 10%;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*flex-wrap: wrap;*/
   height: 100px;
   /*text-align: center;*/
   padding-top: 50px;
 }
 
-button {
-  margin-left: 5px;
+.start, .end {
+  margin-right: 10px;
 }
+
+
+button {
+  /*margin-left: 5px;*/
+  font-family: 'Comic Sans MS', 'sans-serif';
+}
+
 .graphs {
   flex: 90%;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+
+/*#chart-1, #chart-2, #chart-3 {
+  border: 2px solid red;
+}*/
+
+.signal-strength, .speed, .acceleration {
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
 .signal-strength {
   flex: 33%;
-  border: 2px solid blue;
+  /*border: 2px solid blue;*/
   margin: 20px;
   /*overflow-x: auto;*/
   /*width: 100%;*/
@@ -95,12 +115,12 @@ button {
 
 .speed {
   flex: 33%;
-  border: 2px solid blue;
+  /*border: 2px solid blue;*/
   margin: 20px;
 }
 .acceleration {
   flex: 33%;
-  border: 2px solid blue;
+  /*border: 2px solid blue;*/
   margin: 20px;
 }
 
@@ -109,6 +129,7 @@ button {
   padding-top: 50px;
   padding-left: 50px;
   font-size: 32px;
+  font-weight: bold;
   height: 70px;
 }
 
@@ -120,7 +141,33 @@ button {
   flex-direction: row;
   justify-content: center;
 }
+
+.play-controls img {
+  height: 30px;
+  width: 30px;
+  display: none;
+  margin: 8px;
+  cursor: pointer;
+}
+
+.slow {
+  transform: rotateY(180deg);
+  display: none;
+}
+
 .play {
+  display: none;
+}
+
+.pause {
+  display: none;
+}
+
+.fast {
+  display: none;
+}
+
+/*.play {
   width: 100%;
   text-align: center;
   width: 50px;
@@ -138,12 +185,12 @@ button {
   text-align: center;
   width: 50px;
   /*display: none;*/
-}
+/*}*/
 
 .slow {
-  width: 100%;
+ /* width: 100%;
   text-align: center;
-  width: 50px;
+  width: 50px;*/
   /*display: none;*/
 }
 

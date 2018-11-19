@@ -4,6 +4,10 @@ import store from './index.js';
 
 import { changeTime } from './actions';
 
+import buttonPlay from './css/images/play.png';
+import speedButton from './css/images/fast-forward.png';
+import buttonPause from './css/images/pause.png';
+
 let increment = 1;
 class Controls extends Component {
   constructor(props) {
@@ -113,11 +117,35 @@ class Controls extends Component {
         <div className="display"></div>
         {/*<div className="display">{this.state.timeCurrent}</div>*/}
         {/*<div className="display">{this.props.updateTime.index}</div>*/}
-        <button className="play" onClick={() => this.automateSlider()}>Play</button>
-        <button className="pause" onClick={() => this.stopSlider()}>Pause</button>
         <div className="play-controls">
-          <button className="slow" onClick={() => this.decreaseSpeed()}>Slower</button>
-          <button className="fast" onClick={() => this.increaseSpeed()}>Faster</button>
+          <img 
+            src={speedButton} 
+            alt="slow-down-button" 
+            className="slow"
+            onClick={() => this.decreaseSpeed()}
+          />
+          <img 
+            src={buttonPlay} 
+            alt="play-button" 
+            className="play"
+            onClick={() => this.automateSlider()}
+          />
+          <img 
+            src={buttonPause} 
+            alt="pause-button" 
+            className="pause"
+            onClick={() => this.stopSlider()}
+          />
+          <img 
+            src={speedButton} 
+            alt="fast-forward-button" 
+            className="fast"
+            onClick={() => this.increaseSpeed()}
+          />
+          {/*<button className="slow" onClick={() => this.decreaseSpeed()}>Slower</button>
+          <button className="play" onClick={() => this.automateSlider()}>Play</button>
+          <button className="pause" onClick={() => this.stopSlider()}>Pause</button>
+          <button className="fast" onClick={() => this.increaseSpeed()}>Faster</button>*/}
         </div>
       </div>
     )

@@ -10,7 +10,7 @@ import { googleMapsAPI } from './config2.js';
 
 import store from './index.js';
 import Pointer from './Pointer.js';
-import Line from './Polyline.js';
+import Polyline from './Polyline.js';
 
 
 class SimpleMap extends Component {
@@ -56,16 +56,16 @@ class SimpleMap extends Component {
   // }
 
   addMaps(map, maps) {
-    console.log('only add once');
+    // console.log('only add once');
     this.setState({
       map: map,
       maps: maps,
       mapLoaded: true
-    }, () => console.log('maps', this.state.maps))
+    })
   }
  
   render() {
-    console.log('CURRENT', this.props.data.current);
+    // console.log('CURRENT', this.props.data.current);
     let markers = [];
     if (this.props.data.current) {
       // let center = {
@@ -99,7 +99,7 @@ class SimpleMap extends Component {
         {markers}
         {
           this.state.mapLoaded ? 
-            <Line map={this.state.map} maps={this.state.maps} path={this.state.path} /> :
+            <Polyline map={this.state.map} maps={this.state.maps} path={this.state.path} /> :
             null
 
         }
@@ -110,7 +110,7 @@ class SimpleMap extends Component {
             Speed: {this.state.speed} mph 
           </div>
           <div className="map-signal">
-            Signal Strength: {this.state.signal}
+            Signal Strength: {this.state.signal} rssi
           </div>
         </div>
       </div>

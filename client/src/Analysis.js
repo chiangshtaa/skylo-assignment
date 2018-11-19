@@ -20,11 +20,11 @@ class Analysis extends Component {
         alert('No data between these times!');
         let slider = document.getElementsByClassName('slider');
         let playControls = document.getElementsByClassName('play-controls');
-        let display = document.getElementsByClassName('display');
+        // let display = document.getElementsByClassName('display');
         let play = document.getElementsByClassName('play');
         slider[0].style.display = 'none';
         playControls[0].style.display = 'none';
-        display[0].style.display = 'none';
+        // display[0].style.display = 'none';
         play[0].style.display = 'none';
       }
         // let slider = document.getElementsByClassName('slider');
@@ -76,20 +76,25 @@ class Analysis extends Component {
     // this.props.dispatch(getData());
     let slider = document.getElementsByClassName('slider');
     let playControls = document.getElementsByClassName('play-controls');
-    let display = document.getElementsByClassName('display');
+    // let display = document.getElementsByClassName('display');
     let play = document.getElementsByClassName('play');
+    let slow = document.getElementsByClassName('slow');
+    let fast = document.getElementsByClassName('fast');
     slider[0].style.display = 'block';
     playControls[0].style.display = 'flex';
-    display[0].style.display = 'block';
+    // display[0].style.display = 'block';
     play[0].style.display = 'block';
+    slow[0].style.display = 'block';
+    fast[0].style.display = 'block';
   }
 
   render() {
     return (
       <div className='graphs-container'>
         <div className="inputs">
-          <label>Start</label>
+          <label>Start: </label>
           <input 
+            className="start"
             placeholder="HH:MM:SS DD/MM/YYYY" 
             name="" 
             size="21" 
@@ -97,8 +102,9 @@ class Analysis extends Component {
             onChange={(e) => this.changeStart(e)}
           />
 
-          <label>End</label>
+          <label>End: </label>
           <input 
+            className="end"
             placeholder="HH:MM:SS DD/MM/YYYY" 
             name="" 
             size="21" 
