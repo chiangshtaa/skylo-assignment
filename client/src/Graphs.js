@@ -39,8 +39,11 @@ class Graphs extends Component {
       })
       let accObj = {};
       for (let i = 1; i < range.length; i++) {
+        let timeDiffInSeconds = (range[i].timestamp - range[i - 1].timestamp) / ( 1000 );
+        let speedDiff = range[i].speed - range[i - 1].speed;
         // accObj[`${i}`] = range[i].speed / (range[i].timestamp - range[i - 1].timestamp);
-        accObj[`${range[i].index}`] = range[i].speed / (range[i].timestamp - range[i - 1].timestamp);
+        // accObj[`${range[i].index}`] = range[i].speed / (range[i].timestamp - range[i - 1].timestamp); // dividing by milliseconds
+        accObj[`${range[i].index}`] = speedDiff / timeDiffInSeconds; // 
       }
       this.setState({
         signalStrength: signalObj,

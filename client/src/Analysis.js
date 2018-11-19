@@ -67,8 +67,8 @@ class Analysis extends Component {
     endDate = endDate.replace(/\//g, '-').split('-').reverse().join('-');
     endTime = endTime + '.000';
 
-    console.log(startTime, startDate);
-    console.log(endTime, endDate);
+    // console.log(startTime, startDate);
+    // console.log(endTime, endDate);
 
     let startResult = `${startDate}T${startTime}Z`;
     let endResult = `${endDate}T${endTime}`;
