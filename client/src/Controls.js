@@ -32,7 +32,7 @@ class Controls extends Component {
 
   changeTime(e) {
     let newTime = e.target.value;
-    console.log('newTime', newTime);
+    // console.log('newTime', newTime);
     this.setState({
       timeCurrent: e.target.value
     }, () => this.props.dispatch(changeTime(newTime)))
@@ -44,7 +44,7 @@ class Controls extends Component {
     let pauseButton = document.getElementsByClassName('pause');
     playButton[0].style.display = 'none';
     pauseButton[0].style.display = 'block';
-    console.log('style', playButton[0].style.display);
+    // console.log('style', playButton[0].style.display);
     this.setState({
       play: true
     })
@@ -59,7 +59,7 @@ class Controls extends Component {
           increment = 10;
         }
         let time = Number(this.state.timeCurrent) + Number(increment);
-        console.log('increment', increment);
+        // console.log('increment', increment);
         if (time > this.state.timeEnd) {
           time = this.state.timeEnd;
         }
@@ -110,7 +110,7 @@ class Controls extends Component {
           min={this.state.timeStart}
           max={this.state.timeEnd} 
           // min="0"
-          // max={this.props.data.length - 1}
+          // max={this.props.data.range.length - 1}
           value={this.state.timeCurrent} 
           onChange={(e) => this.changeTime(e)}
         />
