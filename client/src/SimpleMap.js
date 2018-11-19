@@ -7,11 +7,11 @@ import GoogleMap from 'google-map-react';
 
 // import { googleMapsAPI } from '../server/config.js';
 import { googleMapsAPI } from './config.js';
+console.log('googleMapsAPI', googleMapsAPI);
 import store from './index.js';
-
+import Pointer from './Pointer.js';
 import Line from './Polyline.js';
 
-import Pointer from './Pointer.js';
 
 class SimpleMap extends Component {
   constructor(props) {
