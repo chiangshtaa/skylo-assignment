@@ -5,7 +5,9 @@ var request = require('request');
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/public')));
+// app.use(express.static(path.join(__dirname, 'client/public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 
 let options = {
   // url: url,
