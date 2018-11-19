@@ -75,7 +75,7 @@ body, html {
   /*flex-direction: row;*/
   /*flex-wrap: wrap;*/
   height: 100px;
-  /*text-align: center;*/
+  text-align: center;
   padding-top: 50px;
 }
 
