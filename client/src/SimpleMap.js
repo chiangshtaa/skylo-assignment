@@ -6,8 +6,8 @@ import { connect } from 'react-redux'
 import GoogleMap from 'google-map-react';
 
 // import { googleMapsAPI } from '../server/config.js';
-import { googleMapsAPI } from './config.js';
-console.log('googleMapsAPI', googleMapsAPI);
+import { googleMapsAPI } from './config2.js';
+
 import store from './index.js';
 import Pointer from './Pointer.js';
 import Line from './Polyline.js';
