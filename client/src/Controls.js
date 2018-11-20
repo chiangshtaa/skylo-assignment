@@ -22,10 +22,17 @@ class Controls extends Component {
 
     store.subscribe(() => {
       let range = store.getState().data.range;
-      this.setState({
-        timeStart: 0,
-        timeEnd: range.length - 1
-      })
+      // console.log('here');
+      if (range.length - 1 !== this.state.timeEnd) {
+        this.setState({
+          timeCurrent: 0,
+          timeEnd: range.length - 1
+        })
+      }
+      // this.setState({
+      //   timeStart: 0,
+      //   timeEnd: range.length - 1
+      // })
     })
   }
 
@@ -152,11 +159,13 @@ class Controls extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.data,
-  updateTime: state.updateTime
-})
+// const mapStateToProps = state => ({
+//   data: state.data,
+//   updateTime: state.updateTime
+// })
 
-export default connect(mapStateToProps)(Controls);
+export default connect()(Controls);
+
+// export default connect(mapStateToProps)(Controls);
 
 

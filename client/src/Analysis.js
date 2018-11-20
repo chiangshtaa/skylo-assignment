@@ -6,6 +6,10 @@ import { connect } from 'react-redux'
 import { getData } from './actions'
 import store from './index.js';
 
+import DatePicker from "react-datepicker";
+ 
+import "react-datepicker/dist/react-datepicker.css";
+
 class Analysis extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +18,9 @@ class Analysis extends Component {
       end: '',
       startTime: '',
       endTime: '',
-      tempEnd: '00:01:23 07/11/2018'
+      tempEnd: '00:01:23 07/11/2018',
+      startDate: new Date(),
+      endDate: new Date()
     }
 
     store.subscribe(() => {
@@ -72,10 +78,58 @@ class Analysis extends Component {
 
   getData() {
     console.log('start', this.state.start, this.state.end);
-    if (this.state.start === '' || this.state.end === '') {
+    if (this.state.startDate === '' || this.state.endDate === '') {
       alert('Please enter valid dates');
       return;
     }
+
+    let monthStart = (this.state.startDate.getMonth() + 1).toString();
+    let dayStart = this.state.startDate.getDate().toString();
+    let yearStart = this.state.startDate.getFullYear().toString();
+
+    if (monthStart.length !== 2) {
+      monthStart = '0' + monthStart;
+    }
+    if (dayStart.length !== 2) {
+      dayStart = '0' + dayStart;
+    }
+
+    console.log('month start', monthStart);
+    console.log('day start', dayStart);
+    console.log('year start', yearStart);
+
+    let monthEnd = (this.state.endDate.getMonth() + 1).toString();
+    let dayEnd = this.state.endDate.getDate().toString();
+    let yearEnd = this.state.endDate.getFullYear().toString();
+
+    if (monthEnd.length !== 2) {
+      monthEnd = '0' + monthEnd;
+    }
+    if (dayEnd.length !== 2) {
+      dayEnd = '0' + dayEnd;
+    }
+
+    console.log('month end', monthEnd);
+    console.log('day end', dayEnd);
+    console.log('year end', yearEnd);
+
+    let startResult = `${yearStart}-${monthStart}-${dayStart}T00:00:00.000Z`
+    let endResult = `${yearEnd}-${monthEnd}-${dayEnd}T23:59:59.000`
+
+
+
+
+
+    console.log(startResult, endResult);
+    this.props.dispatch(getData(startResult, endResult));
+
+
+
+
+
+
+
+
     // let start = this.state.start === '' ? '13:02:43 20/10/2018' : this.state.start;
     // let [startTime, startDate] = start.split(' ');
     // startDate = startDate.replace(/\//g, '-').split('-').reverse().join('-');
@@ -93,15 +147,12 @@ class Analysis extends Component {
     // let endTime = '00:00:00.000';
 
 
-    let startTime = this.state.startTime === '' ? '00:00:00.000Z' : this.state.startTime + ':00.000Z';
-    let endTime = this.state.endTime === '' ? '00:00:00.000' : this.state.endTime + ':00.000';
-    let startResult = `${this.state.start}T${startTime}`;
-    let endResult = `${this.state.end}T${endTime}`;
-    console.log(startResult, endResult);
+    // let startTime = this.state.startTime === '' ? '00:00:00.000Z' : this.state.startTime + ':00.000Z';
+    // let endTime = this.state.endTime === '' ? '00:00:00.000' : this.state.endTime + ':00.000';
+    // let startResult = `${this.state.start}T${startTime}`;
+    // let endResult = `${this.state.end}T${endTime}`;
     // let startResult = `${startDate}T${startTime}Z`;
     // let endResult = `${endDate}T${endTime}`;
-
-    this.props.dispatch(getData(startResult, endResult));
 
 
 
@@ -119,13 +170,31 @@ class Analysis extends Component {
     fast[0].style.display = 'block';
   }
 
+  handleStart(date) {
+    console.log('start date', date);
+    this.setState({
+      startDate: date
+    })
+  }
+
+  handleEnd(date) {
+    console.log('end date', date.getDate());
+    this.setState({
+      endDate: date
+    })
+  }
+
   render() {
     return (
       <div className='graphs-container'>
         <div className="inputs-container">
           <div className="inputs">
             <label className="label">Start: </label>
-            <input
+            <DatePicker
+              selected={this.state.startDate}
+              onChange={(date) => this.handleStart(date)}
+            />
+            {/*<input
               className="start"
               placeholder="Pick start date"
               name=""
@@ -137,12 +206,16 @@ class Analysis extends Component {
               className="end"
               type="time"
               onChange={(e) => this.changeStartTime(e)}
-            />
+            />*/}
           </div>
           <br/>
           <div className="inputs">
             <label className="label">End: </label>
-            <input
+            <DatePicker
+              selected={this.state.endDate}
+              onChange={(date) => this.handleEnd(date)}
+            />
+            {/*<input
               className="start"
               placeholder="Pick end date"
               name=""
@@ -154,7 +227,7 @@ class Analysis extends Component {
               className="end"
               type="time"
               onChange={(e) => this.changeEndTime(e)}
-            />
+            />*/}
           </div>
           <button className="go" onClick={() => this.getData()} type='button'>Go</button>
         </div>

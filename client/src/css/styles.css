@@ -41,6 +41,7 @@ body, html {
   width: 80%;
   float: right;*/
   border-left: 5px solid black;
+  height: 100vh;
 }
 
 .graphs-container, .main-container {
@@ -54,6 +55,7 @@ body, html {
 
 .main-container {
   width: 100%;
+  height: 100vh;
 }
 
 .map-container {
@@ -61,12 +63,23 @@ body, html {
   border: 2px solid black;
   margin: 20px;
   position: relative;
-  height: 100%;
+  height: 75vh;
+  /*width: 100%;*/
 }
 
-.simple-map {
+
+/*.simple-map {
   width: 100%;
   height: 400px;
+}*/
+
+
+input[type="date"]
+{
+    display:inline-block;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    min-height: 1.2em;   
 }
 
 .inputs-container {
@@ -86,7 +99,7 @@ body, html {
 }
 
 .go {
-  margin-left: 240px;
+  margin-left: 150px;
   width: 50px;
   cursor: pointer;
 }
@@ -105,20 +118,22 @@ button {
   flex: 90%;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 75vh;
 }
 
 /*#chart-1, #chart-2, #chart-3 {
-  border: 2px solid red;
+  height: 100%;
+  position: relative;
 }*/
 
 .signal-strength, .speed, .acceleration {
   border: 2px solid black;
   border-radius: 5px;
+  height: 30%;
 }
 
 .signal-strength {
-  flex: 33%;
+  flex: 10%;
   /*border: 2px solid blue;*/
   margin: 20px;
   /*overflow-x: auto;*/
@@ -126,12 +141,12 @@ button {
 }
 
 .speed {
-  flex: 33%;
+  flex: 10%;
   /*border: 2px solid blue;*/
   margin: 20px;
 }
 .acceleration {
-  flex: 33%;
+  flex: 10%;
   /*border: 2px solid blue;*/
   margin: 20px;
 }

@@ -39,16 +39,31 @@ class SimpleMap extends Component {
       let speed = current ? current.speed : this.state.speed;
       let rssi = current ? current.rssi : this.state.signal;
       let visited = range.slice(0, Number(currentIndex) + 1);
-      this.setState({
-        center: {
-          lat: lat,
-          lng: lng
+      console.log('currentIndex', range.length);
+
+      if (range.length !== this.state.range.length) {
+        this.setState({
+          center: {
+          lat: range[0].lat,
+          lng: range[0].long
         },
-        path: visited,
-        range: range,
-        speed: speed,
-        signal: rssi
-      });
+          path: [range[0]],
+          range: range,
+          speed: speed,
+          signal: rssi
+        })
+      } else {
+        this.setState({
+          center: {
+            lat: lat,
+            lng: lng
+          },
+          path: visited,
+          range: range,
+          speed: speed,
+          signal: rssi
+        });
+      }
     })
 
   }
