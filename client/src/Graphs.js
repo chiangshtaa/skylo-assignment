@@ -13,20 +13,21 @@ class Graphs extends Component {
     this.state = {
       signalStrength: {},
       speed: {},
-      acceleration: {}
+      acceleration: {},
+      total: []
     }
 
     store.subscribe(() => {
-      let range = store.getState().data.range;
+      let total = store.getState().data.range;
       let middle = store.getState().updateTime.index;
       middle = Number(middle);
+      let range = total.slice(middle, middle + 25);
       range = range.map((entry, i) => {
         return {
           ...entry,
           index: i
         }
       })
-      range = range.slice(middle, middle + 25);
       let signalObj = {};
       let speedObj = {};
       range.forEach((entry) => {
@@ -45,13 +46,24 @@ class Graphs extends Component {
         // accObj[`${range[i].index}`] = range[i].speed / (range[i].timestamp - range[i - 1].timestamp); // dividing by milliseconds
         accObj[`${range[i].index}`] = speedDiff / timeDiffInSeconds; // 
       }
-      this.setState({
-        signalStrength: signalObj,
-        speed: speedObj,
-        acceleration: accObj
-      })
+      if (total.length !== this.state.total.length) {
+        this.setState({
+          signalStrength: {},
+          speed: {},
+          acceleration: {},
+          total: total
+        })
+      } else {
+        this.setState({
+          signalStrength: signalObj,
+          speed: speedObj,
+          acceleration: accObj,
+          total: total
+        })
+      }
     })
   }
+
   render() {
     return (
       <div className="graphs">
