@@ -44,10 +44,10 @@ class SimpleMap extends Component {
       if (range.length !== this.state.range.length) {
         this.setState({
           center: {
-          lat: range[0].lat,
-          lng: range[0].long
+          lat: range.length !== 0 ? range[0].lat : 37.77,
+          lng: range.length !== 0 ? range[0].long : -122.41
         },
-          path: [range[0]],
+          path: range.length !== 0 ? [range[0]] : [{lat: 37.77, long: -122.41}],
           range: range,
           speed: speed,
           signal: rssi
