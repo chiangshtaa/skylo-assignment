@@ -10,6 +10,7 @@ import { googleMapsAPI } from './config2.js';
 
 import store from './index.js';
 import Pointer from './Pointer.js';
+import Current from './Current.js';
 import Polyline from './Polyline.js';
 
 
@@ -39,7 +40,6 @@ class SimpleMap extends Component {
       let speed = current ? current.speed : this.state.speed;
       let rssi = current ? current.rssi : this.state.signal;
       let visited = range.slice(0, Number(currentIndex) + 1);
-      console.log('currentIndex', range.length);
 
       if (range.length !== this.state.range.length) {
         this.setState({
@@ -49,8 +49,8 @@ class SimpleMap extends Component {
         },
           path: range.length !== 0 ? [range[0]] : [{lat: 37.77, long: -122.41}],
           range: range,
-          speed: speed,
-          signal: rssi
+          speed: 0,
+          signal: 0
         })
       } else {
         this.setState({
@@ -82,23 +82,31 @@ class SimpleMap extends Component {
   render() {
     // console.log('CURRENT', this.props.data.current);
     let markers = [];
+    let current;
     if (this.props.data.current) {
       // let center = {
       //   lat: this.props.data.current.lat,
       //   lng: this.props.data.current.long
       // }
-      markers = this.state.path.map((entry, index) => {
-        // console.log('entry', entry);
-        return (
-          <Pointer lat={entry.lat} lng={entry.long} key={index}/>
-        )
-      })
-      
+      if (this.state.path.length === 1 && this.state.path[0].lat === 37.77 && this.state.path[0].long === -122.41) {
+        markers = null;
+        current = null;
+      } else {
+        markers = this.state.path.slice(0, -1).map((entry, index) => {
+          // console.log('entry', entry);
+          return (
+            <Pointer lat={entry.lat} lng={entry.long} key={index}/>
+          )
+        })
+        current = this.state.path.slice(-1);
+      }
+      // console.log('markers', markers);
+      // console.log('current', current);
     }
     // if (this.state.set) {
     //   this.renderPolylines(this.state.map, this.state.maps);
     // }
-    // console.log(this.state.mapLoaded, this.state.range);
+    // console.log('this.state.path', this.state.path);
     return (
       <div style={{ height: '100%', width: '100%' }}>
         <GoogleMap
@@ -112,6 +120,10 @@ class SimpleMap extends Component {
         >
 
         {markers}
+        {
+          (this.state.path.length > 0 && current && current.length === 1) ? <Current lat={current[0].lat} lng={current[0].long}/> : null
+        }
+
         {
           this.state.mapLoaded ? 
             <Polyline map={this.state.map} maps={this.state.maps} path={this.state.path} /> :
